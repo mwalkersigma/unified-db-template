@@ -1,0 +1,61 @@
+#Required
+# IMPORTANT: This is the name for your application, It will be used for logging and access control.
+NEXT_PUBLIC_SYSTEM_NAME=SystemNameHere
+# This can be [ dev, test, prod ]
+NEXT_PUBLIC_ENVIRONMENT_NAME=EnvironmentNameHere
+#Required
+NEXT_PUBLIC_AG_GRID_LICENSE=YOUR_TOKEN_HERE
+#Needs no change
+WEBSOCKET_URL=http://10.100.100.33:4020
+# This is the log level for the application, It can be set to error, warn, info, debug, or trace
+LOG_LEVEL=debug
+#Required
+# This is needed to connect to the unified DB, If you do not have a connection string reach out to the BSA Team.
+SH_CONNECTION_STRING=Connection_String_Here
+
+
+# If using Sku Vault, you will need to add the following environment variables to your .env file
+SKU_VAULT_TENANT_TOKEN=YOUR_TOKEN_HERE
+SKU_VAULT_USER_TOKEN=YOUR_TOKEN_HERE
+
+
+
+#Required
+# This is for setting up the Google OAuth, If you do not have a client ID and secret, You will need to set them up in the Google Developer Console.
+# https://next-auth.js.org/providers/google
+CLIENT_ID=YOUR_TOKEN_HERE
+CLIENT_SECRET=YOUR_TOKEN_HERE
+NEXTAUTH_SECRET=YOUR_TOKEN_HERE
+
+#Required
+# This is the URL that the application is running on, If you are running locally it will be http://localhost:3000
+NEXTAUTH_URL=http://localhost:3000
+
+# If you need to use the channel advisor API, you will need to set up an application in the channel advisor developer portal.
+APPLICATION_ID=YOUR_TOKEN_HERE
+SHARED_SECRET=YOUR_TOKEN_HERE
+REFRESH_TOKEN=YOUR_TOKEN_HERE
+
+# Same for ship station
+SHIPSTATION_TOKEN=YOUR_TOKEN_HERE
+INSIGHTLY_API_KEY=YOUR_TOKEN_HERE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
