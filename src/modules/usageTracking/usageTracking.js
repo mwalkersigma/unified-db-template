@@ -2,7 +2,8 @@ import User, {Visit} from "../classes/user"
 import Query from "../classes/Query.js";
 import db from "../../modules/db/index.js";
 import {SYSTEM_NAME} from "../utils/constants.js";
-import { debug } from "../logger/index.js";
+import custom_logger from "../logger/index.js";
+const { debug } = custom_logger;
 
 
 
@@ -34,7 +35,7 @@ async function getUsage() {
             `,
         ]
     )
-        .join(`dev.usage.${SYSTEM_NAME} u`, 'LEFT', 'u.user_id = users.id')
+        .join(`usage.${SYSTEM_NAME} u`, 'LEFT', 'u.user_id = users.id')
         .addGroupBy('name')
         .addGroupBy('image')
         .addGroupBy('email')

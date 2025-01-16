@@ -41,7 +41,7 @@ const postgresTransport = new PostgresTransport({
     format: combine(timestamp(), json()),
 })
 
-const logger = winston.createLogger({
+const custom_logger = winston.createLogger({
     level: process.env.LOG_LEVEL || 'info',
     format: combine(errors({stack: true}), timeStampFormatter, json()),
     exitOnError: false,
@@ -56,12 +56,12 @@ if ( UPLOAD_LOGS === 'false'){
 }
 
 if (NODE_ENV !== 'production' || LOGGING_ENABLED === 'true') {
-    logger.add(cliTransport)
+    custom_logger.add(cliTransport)
 }
 
 if (UPLOAD_LOGS === 'true') {
-    logger.add(postgresTransport)
+    custom_logger.add(postgresTransport)
 }
 
 
-module.exports = logger;
+module.exports = custom_logger;

@@ -51,6 +51,9 @@ const db = {
 async function DBSetup() {
     await db.query(`CREATE SCHEMA IF NOT EXISTS audit;`);
     await db.query(`CREATE SCHEMA IF NOT EXISTS logs;`);
+    await db.query(`CREATE SCHEMA IF NOT EXISTS usage;`);
+    await db.query(`CREATE SCHEMA IF NOT EXISTS access_control;`);
+    await db.query(`CREATE SCHEMA IF NOT EXISTS access_control_roles;`);
     await db.query(`CREATE SCHEMA IF NOT EXISTS ${SYSTEM_NAME};`);
     console.log("Creating Audit system for app. This will create a table to track changes to the database.")
     console.log("You will still need to add triggers to the tables you want to track.")

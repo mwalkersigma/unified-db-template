@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import {useContext, useRef} from "react";
 import {AccessControlContext} from "../../pages/_app.jsx";
 import {processPermissions} from "../utils/permission_utils.js";
 
@@ -11,22 +11,18 @@ class PermissionResults {
 }
 
 
-
 export function usePermissions(options) {
-    let [isAuthorized, setIsAuthorized] = useState(false);
-    const { user } = useContext(AccessControlContext);
-    if(!user) {
+    const authorization = useRef(null);
+    const {user} = useContext(AccessControlContext);
+    if (!user) {
         return new PermissionResults({
             authorized: false,
             isLoading: true
         });
     }
-    if(isAuthorized) {
-        // if we are already authorized, we can return early
-        return new PermissionResults({
-            authorized: true,
-            isLoading: false
-        });
+    if( authorization.current) {
+
+        return authorization.current;
     }
 
     let permissions = options?.permissions ?? [];
@@ -40,10 +36,10 @@ export function usePermissions(options) {
             users
         }
     );
-
-    return new PermissionResults({
+    authorization.current = new PermissionResults({
         authorized,
         isLoading: false
     })
+    return authorization.current;
 
 }

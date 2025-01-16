@@ -93,20 +93,17 @@ export default class PermissionsHelper {
 
     canAccess(user, permissionString) {
         let userPrivileges = user[accessControlSymbol];
-        let mappedPrivileges = userPrivileges?.map(p=>p?.toLowerCase());
-        console.log(userPrivileges);
+        if (!userPrivileges) return false;
+        let mappedPrivileges = userPrivileges?.map(p => p?.toLowerCase());
         let canAccess = mappedPrivileges?.includes(permissionString.toLowerCase());
         if (canAccess) return canAccess;
 
         let privilegeNeeded = permissionString.split("::")
-        console.log(privilegeNeeded);
         let currentLevel = "";
         for (let level of privilegeNeeded) {
             currentLevel += level?.toLowerCase();
-            console.log(currentLevel);
-            if (mappedPrivileges.includes(currentLevel)) {
+            if (mappedPrivileges?.includes(currentLevel)) {
                 canAccess = true;
-                console.log("Break")
                 break;
             }
             currentLevel += "::";
@@ -116,18 +113,21 @@ export default class PermissionsHelper {
 
     selfCanAccess(user, permissionString) {
         let userPrivileges = user[accessControlSymbol];
-        let canAccess = userPrivileges.includes(permissionString);
+        if (!userPrivileges) return false;
+
+        let canAccess = userPrivileges?.includes(permissionString);
         if (canAccess) return canAccess;
 
         let privilegeNeeded = permissionString.split("::")
         let currentLevel = "";
         for (let level of privilegeNeeded) {
             currentLevel += level;
-            if (userPrivileges.includes(currentLevel + "::self")) {
+            if (userPrivileges?.includes(currentLevel + "::self")) {
                 canAccess = true;
             }
             currentLevel += "::";
         }
+        return canAccess;
     }
 
     accessControl(user, permissionString) {
